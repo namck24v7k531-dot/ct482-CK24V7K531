@@ -1,0 +1,7 @@
+# CHỈ DÙNG KHI KIỂM THỬ: bỏ cổng map ra host của các dịch vụ extras (dùng kèm docker-compose.noports.yml)
+services:
+  hive-metastore: {ports: !reset []}
+  hiveserver2:    {ports: !reset []}
+  kafka:          {ports: !reset []}
+  hbase:          {ports: !reset []}
+  mongodb:        {ports: !reset []}

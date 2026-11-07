@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!-- mapred-site.xml — MapReduce trên YARN, chạy bằng Java 17 (cần các tuỳ chọn add-opens) -->
+<configuration>
+  <property><name>mapreduce.framework.name</name><value>yarn</value></property>
+  <property><name>mapreduce.jobhistory.address</name><value>historyserver:10020</value></property>
+  <property><name>mapreduce.jobhistory.webapp.address</name><value>historyserver:19888</value></property>
+  <property><name>mapreduce.jobhistory.bind-host</name><value>0.0.0.0</value></property>
+  <property><name>yarn.app.mapreduce.am.env</name><value>HADOOP_MAPRED_HOME=/opt/hadoop</value></property>
+  <property><name>mapreduce.map.env</name><value>HADOOP_MAPRED_HOME=/opt/hadoop</value></property>
+  <property><name>mapreduce.reduce.env</name><value>HADOOP_MAPRED_HOME=/opt/hadoop</value></property>
+  <property><name>yarn.app.mapreduce.am.resource.mb</name><value>512</value></property>
+  <property><name>yarn.app.mapreduce.am.command-opts</name><value>-Xmx400m --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.base/java.security=ALL-UNNAMED</value></property>
+  <property><name>mapreduce.map.memory.mb</name><value>512</value></property>
+  <property><name>mapreduce.map.java.opts</name><value>-Xmx400m --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.base/java.security=ALL-UNNAMED</value></property>
+  <property><name>mapreduce.reduce.memory.mb</name><value>768</value></property>
+  <property><name>mapreduce.reduce.java.opts</name><value>-Xmx600m --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.base/java.security=ALL-UNNAMED</value></property>
+  <property><name>mapreduce.task.io.sort.mb</name><value>100</value></property>
+</configuration>

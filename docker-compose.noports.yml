@@ -1,0 +1,10 @@
+# CHỈ DÙNG KHI KIỂM THỬ: bỏ toàn bộ cổng map ra host của cụm lõi (cần Docker Compose >= 2.24)
+services:
+  namenode:        {ports: !reset []}
+  datanode1:       {ports: !reset []}
+  datanode2:       {ports: !reset []}
+  resourcemanager: {ports: !reset []}
+  spark-master:    {ports: !reset []}
+  nodemanager1:    {ports: !reset []}
+  nodemanager2:    {ports: !reset []}
+  historyserver:   {ports: !reset []}

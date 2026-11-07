@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- core-site.xml cho container Hive (mount vào /hive_custom_conf): trỏ về HDFS của cụm -->
+<configuration>
+  <property><name>fs.defaultFS</name><value>hdfs://namenode:9000</value></property>
+  <property><name>dfs.client.use.datanode.hostname</name><value>true</value></property>
+  <property><name>hadoop.proxyuser.hive.hosts</name><value>*</value></property>
+  <property><name>hadoop.proxyuser.hive.groups</name><value>*</value></property>
+</configuration>

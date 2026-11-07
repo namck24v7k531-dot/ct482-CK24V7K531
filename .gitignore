@@ -1,0 +1,11 @@
+# dữ liệu sinh ra và tệp tải về — không đưa lên GitHub
+data/*
+!data/.gitkeep
+downloads/*
+!downloads/.gitkeep
+.env
+
+# tệp sinh ra khi chạy bài (Python trong container, môi trường ảo Buổi 6)
+__pycache__/
+*.pyc
+.venv/

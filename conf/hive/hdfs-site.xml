@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- hdfs-site.xml cho container Hive: cụm chỉ có 2 DataNode nên tệp do Hive ghi chỉ nhân bản 2 lần -->
+<configuration>
+  <property><name>dfs.replication</name><value>2</value></property>
+  <property><name>dfs.client.use.datanode.hostname</name><value>true</value></property>
+</configuration>

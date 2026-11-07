@@ -1,0 +1,33 @@
+# Build image bigdata-lab:2026.10 MỘT LẦN trên GitHub Actions và đẩy lên GitHub Container Registry.
+# Chạy tay: tab Actions → "Build image bigdata-lab" → Run workflow. Tự chạy lại khi sửa Dockerfile/conf/scripts.
+# Sau lần chạy đầu: Profile/Organization → Packages → bigdata-lab → Package settings → Change visibility → Public,
+# rồi ghi LAB_IMAGE=ghcr.io/<owner>/bigdata-lab:2026.10 vào .devcontainer/cau-hinh.env.
+name: Build image bigdata-lab
+on:
+  workflow_dispatch:
+  push:
+    paths: ["Dockerfile", "conf/**", "scripts/**"]
+permissions:
+  contents: read
+  packages: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tên image (owner viết thường)
+        run: echo "IMG=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/bigdata-lab" >> "$GITHUB_ENV"
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ env.IMG }}:2026.10
+            ${{ env.IMG }}:latest

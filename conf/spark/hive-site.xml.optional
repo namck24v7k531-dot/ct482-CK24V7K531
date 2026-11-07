@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TUỲ CHỌN, CÓ GIỚI HẠN. Spark 4.1.3 dùng Hive client 2.3.10 tích hợp; với Hive Metastore 4.2.1 chỉ
+     SHOW DATABASES / SHOW TABLES chạy được, còn đọc bảng báo lỗi "Invalid method name: 'get_table'".
+     Các bài lab KHÔNG cần Spark dùng chung metastore với Hive: hãy đọc trực tiếp tệp ORC/Parquet theo
+     đường dẫn HDFS, ví dụ spark.read.orc("hdfs://namenode:9000/user/hive/warehouse/retail_dw.db/txn_part_orc"). -->
+<configuration>
+  <property><name>hive.metastore.uris</name><value>thrift://hive-metastore:9083</value></property>
+  <property><name>hive.metastore.warehouse.dir</name><value>hdfs://namenode:9000/user/hive/warehouse</value></property>
+</configuration>

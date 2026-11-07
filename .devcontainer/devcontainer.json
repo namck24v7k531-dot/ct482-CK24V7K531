@@ -1,0 +1,53 @@
+// =============================================================================
+//  CT482 "Xử lý dữ liệu lớn" — môi trường thực hành chạy trên GitHub Codespaces
+//  (hoặc VS Code + Dev Containers trên máy cá nhân, cùng một cấu hình).
+//  Cụm Hadoop/Spark chạy bằng docker-compose.yml có sẵn, BÊN TRONG codespace
+//  (Docker-in-Docker). Image, dữ liệu HDFS và bài làm được giữ lại giữa các buổi.
+//  Cấu hình nguồn image: .devcontainer/cau-hinh.env
+// =============================================================================
+{
+  "name": "CT482 – Xử lý dữ liệu lớn",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+
+  // Codespaces chọn máy nhỏ nhất thoả mãn yêu cầu này: 2 nhân / 8 GB RAM / 32 GB đĩa.
+  // Đã kiểm thử: cụm lõi + toàn bộ dịch vụ bổ sung chạy được trên máy này (smoke test 17/17).
+  // Sinh viên vẫn có thể chọn máy 4 nhân khi tạo codespace (New with options) cho bài nặng.
+  "hostRequirements": { "cpus": 2, "memory": "8gb", "storage": "32gb" },
+
+  // Chạy MỘT LẦN khi tạo codespace: lấy image bigdata-lab:2026.10, sinh dữ liệu mẫu, cài lệnh `lab`.
+  "postCreateCommand": "bash .devcontainer/khoi-tao.sh",
+  // Chạy MỖI LẦN mở lại codespace: khởi động cụm lõi (8 container).
+  "postStartCommand": "bash .devcontainer/khoi-dong.sh",
+
+  "forwardPorts": [9870, 8088, 8080, 4040, 4041, 18080, 19888, 8042, 8043, 9864, 9865, 10002, 16010, 16030],
+  "portsAttributes": {
+    "9870":  { "label": "HDFS NameNode",          "onAutoForward": "silent" },
+    "8088":  { "label": "YARN ResourceManager",   "onAutoForward": "silent" },
+    "8080":  { "label": "Spark Master",           "onAutoForward": "silent" },
+    "4040":  { "label": "Spark UI (job đang chạy)", "onAutoForward": "silent" },
+    "4041":  { "label": "Spark UI (ứng dụng thứ 2)", "onAutoForward": "silent" },
+    "18080": { "label": "Spark History",          "onAutoForward": "silent" },
+    "19888": { "label": "MapReduce JobHistory",   "onAutoForward": "silent" },
+    "8042":  { "label": "NodeManager 1",          "onAutoForward": "silent" },
+    "8043":  { "label": "NodeManager 2",          "onAutoForward": "silent" },
+    "9864":  { "label": "DataNode 1",             "onAutoForward": "silent" },
+    "9865":  { "label": "DataNode 2",             "onAutoForward": "silent" },
+    "10002": { "label": "HiveServer2 UI",         "onAutoForward": "silent" },
+    "16010": { "label": "HBase Master",           "onAutoForward": "silent" },
+    "16030": { "label": "HBase RegionServer",     "onAutoForward": "silent" }
+  },
+  // Cổng không phải web (9000, 7077, 9092, 27017, 10000...) vẫn dùng được bên trong codespace.
+  "otherPortsAttributes": { "onAutoForward": "ignore" },
+
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "ms-azuretools.vscode-containers", "redhat.vscode-yaml"],
+      "settings": { "terminal.integrated.defaultProfile.linux": "bash" }
+    },
+    "codespaces": { "openFiles": ["HUONG-DAN-CODESPACES.md"] }
+  },
+  "remoteUser": "vscode"
+}
